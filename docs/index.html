@@ -215,10 +215,44 @@
       margin-right: auto;
     }
 
-    .hero-title em {
-      font-family: var(--font-serif);
-      font-style: italic;
+    .hero-second {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .hero-for {
+      color: var(--text-muted);
       font-weight: 400;
+      font-style: italic;
+      font-family: var(--font-serif);
+      margin-right: 4px;
+    }
+
+    #hero-target {
+      font: inherit;
+      letter-spacing: inherit;
+      font-weight: 700;
+      color: var(--accent);
+      border: 0;
+      background: none;
+      padding: 0;
+      text-decoration: underline;
+      text-decoration-color: var(--border-hover);
+      text-decoration-thickness: 3px;
+      text-underline-offset: 8px;
+      cursor: pointer;
+      display: inline-block;
+      transition: text-decoration-color 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    #hero-target:hover {
+      text-decoration-color: var(--accent);
+      opacity: 0.95;
+    }
+
+    #hero-target.swapping {
+      opacity: 0;
+      transform: translateY(6px);
     }
 
     .hero-subtitle {
@@ -611,11 +645,14 @@
       </div>
 
       <h1 class="hero-title">
-        Trình soạn thảo văn bản hiện đại, <em>siêu nhẹ</em>, viết bằng Rust.
+        <span>Trình soạn thảo văn bản</span>
+        <span class="hero-second">
+          <span class="hero-for">cho</span> <button id="hero-target" type="button" aria-label="Đổi đối tượng mục tiêu">Nhà văn</button>
+        </span>
       </h1>
 
       <p class="hero-subtitle">
-        Trải nghiệm Ribbon quen thuộc của Word, đọc/ghi định dạng DOCX & PDF, tối ưu hóa trên GPU với tốc độ tức thì. Tích hợp sẵn giao diện Tiếng Việt và giao thức MCP dành cho AI Agent.
+        Trình soạn thảo văn bản hiện đại, siêu nhẹ, viết bằng Rust. Trải nghiệm Ribbon quen thuộc của Word, đọc/ghi định dạng DOCX & PDF, tối ưu hóa trên GPU với tốc độ tức thì và tích hợp sẵn MCP dành cho AI Agent.
       </p>
 
       <div class="hero-buttons">
@@ -860,6 +897,33 @@
         setTimeout(() => copyBtn.innerText = 'Sao chép', 2000);
       });
     });
+
+    // Hero Target Dynamic Switcher (for... like Vie Agentic Skills)
+    const targets = [
+      'Nhà văn',
+      'AI Agent',
+      'Lập trình viên',
+      'Nhà nghiên cứu',
+      'Người làm nội dung',
+      'Bạn'
+    ];
+    let currentTargetIndex = 0;
+    const heroTargetBtn = document.getElementById('hero-target');
+
+    function cycleTarget() {
+      if (!heroTargetBtn) return;
+      heroTargetBtn.classList.add('swapping');
+      setTimeout(() => {
+        currentTargetIndex = (currentTargetIndex + 1) % targets.length;
+        heroTargetBtn.textContent = targets[currentTargetIndex];
+        heroTargetBtn.classList.remove('swapping');
+      }, 200);
+    }
+
+    if (heroTargetBtn) {
+      heroTargetBtn.addEventListener('click', cycleTarget);
+      setInterval(cycleTarget, 3000);
+    }
   </script>
 </body>
 </html>
