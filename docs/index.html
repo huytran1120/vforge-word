@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>vforge-word — Trình soạn thảo văn bản hiện đại viết bằng Rust</title>
   <meta name="description" content="Trình soạn thảo văn bản mã nguồn mở, siêu nhẹ, viết thuần bằng Rust. Giao diện Ribbon chuẩn, tương thích DOCX, xuất PDF vector, tích hợp AI Agent (MCP) và Việt hóa toàn diện.">
-  <link rel="icon" href="assets/icon.png" type="image/png">
+  <link rel="icon" href="assets/icon.png?v=2" type="image/png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,17 +108,21 @@
       vertical-align: middle;
     }
 
-    [data-theme="dark"] .wordmark-light {
-      display: none;
+    html[data-theme="dark"] .wordmark-light,
+    :root[data-theme="dark"] .wordmark-light {
+      display: none !important;
     }
-    [data-theme="dark"] .wordmark-dark {
-      display: inline-block;
+    html[data-theme="dark"] .wordmark-dark,
+    :root[data-theme="dark"] .wordmark-dark {
+      display: inline-block !important;
     }
-    [data-theme="light"] .wordmark-light {
-      display: inline-block;
+    html[data-theme="light"] .wordmark-light,
+    :root[data-theme="light"] .wordmark-light {
+      display: inline-block !important;
     }
-    [data-theme="light"] .wordmark-dark {
-      display: none;
+    html[data-theme="light"] .wordmark-dark,
+    :root[data-theme="light"] .wordmark-dark {
+      display: none !important;
     }
 
     .nav-links {
@@ -618,9 +622,9 @@
   <header>
     <div class="container nav-inner">
       <a href="#" class="logo-link">
-        <img src="assets/icon.png" alt="vforge-word Logo" class="logo-img">
-        <img src="brand/vforge-wordmark-transparent.png" alt="VForge" class="logo-wordmark wordmark-light">
-        <img src="brand/vforge-wordmark-darkmode.png" alt="VForge" class="logo-wordmark wordmark-dark">
+        <img src="assets/icon.png?v=2" alt="vforge-word Logo" class="logo-img">
+        <img src="brand/vforge-wordmark-transparent.png?v=2" alt="VForge" class="logo-wordmark wordmark-light">
+        <img src="brand/vforge-wordmark-darkmode.png?v=2" alt="VForge" class="logo-wordmark wordmark-dark">
         <span style="font-weight: 500; color: var(--text-muted); font-size: 0.95rem; margin-left: -4px;">Word</span>
       </a>
 
