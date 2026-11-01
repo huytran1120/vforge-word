@@ -101,6 +101,26 @@
       border-radius: 8px;
     }
 
+    .logo-wordmark {
+      height: 24px;
+      width: auto;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    [data-theme="dark"] .wordmark-light {
+      display: none;
+    }
+    [data-theme="dark"] .wordmark-dark {
+      display: inline-block;
+    }
+    [data-theme="light"] .wordmark-light {
+      display: inline-block;
+    }
+    [data-theme="light"] .wordmark-dark {
+      display: none;
+    }
+
     .nav-links {
       display: flex;
       align-items: center;
@@ -599,7 +619,9 @@
     <div class="container nav-inner">
       <a href="#" class="logo-link">
         <img src="assets/icon.png" alt="vforge-word Logo" class="logo-img">
-        <span>vforge-word</span>
+        <img src="brand/vforge-wordmark-transparent.png" alt="VForge" class="logo-wordmark wordmark-light">
+        <img src="brand/vforge-wordmark-darkmode.png" alt="VForge" class="logo-wordmark wordmark-dark">
+        <span style="font-weight: 500; color: var(--text-muted); font-size: 0.95rem; margin-left: -4px;">Word</span>
       </a>
 
       <ul class="nav-links">
