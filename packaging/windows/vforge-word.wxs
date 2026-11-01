@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <?ifndef HasCraftFontLicences ?>
+  <?define HasCraftFontLicences=0 ?>
+  <?endif?>
+  <Package Name="VForge Word" Manufacturer="Learning Machines LLC" Version="$(var.Version)" UpgradeCode="075497F9-E861-45D0-9C7F-A74F8C34E6BA" Scope="perUserOrMachine" Compressed="yes" Language="1033">
+    <SummaryInformation Description="VForge Word word processor" Manufacturer="Learning Machines LLC" />
+    <?include $(sys.SOURCEFILEDIR)install-policy.wxi?>
+    <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
+         (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A newer version of VForge Word is already installed." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <Icon Id="VForgeWordIcon.ico" SourceFile="$(var.IconPath)" />
+    <Property Id="ARPPRODUCTICON" Value="VForgeWordIcon.ico" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/huytran1120/vforge-word" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://github.com/huytran1120/vforge-word" />
+    <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
+
+    <!-- Installer UI (#198): WixUI_Minimal is welcome + license, progress, then a finish page so
+         people can see the install worked. Its dialogs and bitmaps are WiX's own
+         (WixToolset.UI.wixext); package.ps1 builds the license RTF from LICENSE-MIT and
+         LICENSE-APACHE. The finish page offers to launch VForge Word (ticked by default) through
+         WixShellExec (WixToolset.Util.wixext); silent installs (/qn) never show it. -->
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.LicenseRtf)" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch VForge Word" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
+    <Property Id="WixShellExecTarget" Value="[#VForgeWordExe]" />
+    <CustomAction Id="LaunchVForgeWord" BinaryRef="Wix4UtilCA_$(sys.BUILDARCHSHORT)" DllEntry="WixShellExec" Impersonate="yes" Return="ignore" />
+    <UI>
+      <ui:WixUI Id="WixUI_Minimal" />
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchVForgeWord" Condition="WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 AND NOT Installed" />
+    </UI>
+
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="CraftSuiteFolder" Name="ArtCraft">
+        <Directory Id="INSTALLFOLDER" Name="VForge Word" />
+      </Directory>
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder" />
+
+    <Feature Id="Main" Title="VForge Word" Level="1">
+      <ComponentGroupRef Id="AppNotices" />
+      <?if $(var.HasCraftFontLicences) = 1 ?>
+      <ComponentGroupRef Id="CraftFontLicences" />
+      <?endif?>
+      <ComponentGroupRef Id="VForgeWordFiles" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+    <ComponentGroup Id="AppNotices" Directory="INSTALLFOLDER">
+      <Files Include="$(var.AppNoticesDir)\**" />
+    </ComponentGroup>
+    <?if $(var.HasCraftFontLicences) = 1 ?>
+    <ComponentGroup Id="CraftFontLicences" Directory="INSTALLFOLDER">
+      <Files Include="$(var.DocsDir)\**" />
+    </ComponentGroup>
+    <?endif?>
+    <ComponentGroup Id="VForgeWordFiles" Directory="INSTALLFOLDER">
+      <Component Id="VForgeWordApp" Guid="855DCEC6-9285-444F-9382-9654B83B34F6">
+        <File Id="VForgeWordExe" Source="$(var.BinDir)\vforge-word.exe" KeyPath="yes">
+          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="VForge Word" Description="VForge Word word processor" WorkingDirectory="INSTALLFOLDER" Advertise="yes" Icon="VForgeWordIcon.ico" IconIndex="0" />
+        </File>
+
+        <RegistryValue Root="HKMU" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\vforge-word.exe" Value="[#VForgeWordExe]" Type="string" />
+      <RegistryValue Root="HKMU" Key="Software\VForge Word" Name="InstallDir" Value="[INSTALLFOLDER]" Type="string" />
+      </Component>
+
+      <!-- File associations (#295). Each document type gets a VForge Word ProgId (name, icon, open
+           command) and is listed under the extension's OpenWithProgids, so VForge Word shows in
+           Explorer's "Open with". The Word, RTF and ODT types are also VForge Word's Capabilities
+           (RegisteredApplications), so it appears in Settings › Default apps, where the user
+           makes it the default (File › Options › General opens that page). Nothing here sets an
+           extension's default: the installer never takes over .docx from another app. Markdown and
+           plain text are only "Open with" candidates. Removed again on uninstall. -->
+      <Component Id="VForgeWordFileTypes" Guid="EFF89E6A-F9B8-49F9-B3AE-E243347484B4">
+        <RegistryValue Root="HKMU" Key="Software\RegisteredApplications" Name="VForge Word" Value="Software\VForge Word\Capabilities" Type="string" KeyPath="yes" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities" Name="ApplicationName" Value="VForge Word" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities" Name="ApplicationDescription" Value="Write and design documents; open and save Word files." Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities" Name="ApplicationIcon" Value="&quot;[#VForgeWordExe]&quot;,0" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe" Name="FriendlyAppName" Value="VForge Word" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+
+        <ProgId Id="VForge Word.Document" Description="Word Document" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.Document\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.docx\OpenWithProgids" Name="VForge Word.Document" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".docx" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities\FileAssociations" Name=".docx" Value="VForge Word.Document" Type="string" />
+
+        <ProgId Id="VForge Word.DocumentMacroEnabled" Description="Word Macro-Enabled Document" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.DocumentMacroEnabled\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.docm\OpenWithProgids" Name="VForge Word.DocumentMacroEnabled" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".docm" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities\FileAssociations" Name=".docm" Value="VForge Word.DocumentMacroEnabled" Type="string" />
+
+        <ProgId Id="VForge Word.Template" Description="Word Template" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.Template\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.dotx\OpenWithProgids" Name="VForge Word.Template" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".dotx" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities\FileAssociations" Name=".dotx" Value="VForge Word.Template" Type="string" />
+
+        <ProgId Id="VForge Word.TemplateMacroEnabled" Description="Word Macro-Enabled Template" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.TemplateMacroEnabled\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.dotm\OpenWithProgids" Name="VForge Word.TemplateMacroEnabled" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".dotm" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities\FileAssociations" Name=".dotm" Value="VForge Word.TemplateMacroEnabled" Type="string" />
+
+        <ProgId Id="VForge Word.LegacyDocument" Description="Legacy Word Document" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.LegacyDocument\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.doc\OpenWithProgids" Name="VForge Word.LegacyDocument" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".doc" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities\FileAssociations" Name=".doc" Value="VForge Word.LegacyDocument" Type="string" />
+
+        <ProgId Id="VForge Word.LegacyTemplate" Description="Legacy Word Template" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.LegacyTemplate\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.dot\OpenWithProgids" Name="VForge Word.LegacyTemplate" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".dot" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities\FileAssociations" Name=".dot" Value="VForge Word.LegacyTemplate" Type="string" />
+
+        <ProgId Id="VForge Word.RichText" Description="Rich Text Document" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.RichText\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.rtf\OpenWithProgids" Name="VForge Word.RichText" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".rtf" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities\FileAssociations" Name=".rtf" Value="VForge Word.RichText" Type="string" />
+
+        <ProgId Id="VForge Word.OpenDocumentText" Description="OpenDocument Text" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.OpenDocumentText\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.odt\OpenWithProgids" Name="VForge Word.OpenDocumentText" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".odt" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\VForge Word\Capabilities\FileAssociations" Name=".odt" Value="VForge Word.OpenDocumentText" Type="string" />
+
+        <ProgId Id="VForge Word.Markdown" Description="Markdown Document" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.Markdown\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.md\OpenWithProgids" Name="VForge Word.Markdown" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".md" Value="" Type="string" />
+
+        <ProgId Id="VForge Word.PlainText" Description="Text Document" Icon="VForgeWordExe" IconIndex="0" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\VForge Word.PlainText\shell\open\command" Value="&quot;[#VForgeWordExe]&quot; &quot;%1&quot;" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\.txt\OpenWithProgids" Name="VForge Word.PlainText" Value="" Type="string" />
+        <RegistryValue Root="HKMU" Key="Software\Classes\Applications\vforge-word.exe\SupportedTypes" Name=".txt" Value="" Type="string" />
+      </Component>
+
+      <Component Id="VForgeWordCli">
+        <File Id="VForgeWordCliExe" Source="$(var.BinDir)\vforge-word-cli.exe" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

@@ -1,0 +1,291 @@
+{
+  "id": "vforge-word",
+  "name": "VForge Word",
+  "upgradeCode": "075497F9-E861-45D0-9C7F-A74F8C34E6BA",
+  "sources": [
+    "vforge-word.wxs"
+  ],
+  "icon": "assets/app-icon/vforge-word.ico",
+  "localization": [],
+  "extensions": [
+    "UI",
+    "Util"
+  ],
+  "payloads": [
+    "vforge-word-cli.exe",
+    "vforge-word.exe"
+  ],
+  "registry": [
+    [
+      "-1",
+      "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\vforge-word.exe",
+      "",
+      "[#VForgeWordExe]"
+    ],
+    [
+      "-1",
+      "Software\\RegisteredApplications",
+      "VForge Word",
+      "Software\\VForge Word\\Capabilities"
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities",
+      "ApplicationName",
+      "VForge Word"
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities",
+      "ApplicationDescription",
+      "Write and design documents; open and save Word files."
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities",
+      "ApplicationIcon",
+      "\"[#VForgeWordExe]\",0"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe",
+      "FriendlyAppName",
+      "VForge Word"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.Document\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.docx\\OpenWithProgids",
+      "VForge Word.Document",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".docx",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities\\FileAssociations",
+      ".docx",
+      "VForge Word.Document"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.DocumentMacroEnabled\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.docm\\OpenWithProgids",
+      "VForge Word.DocumentMacroEnabled",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".docm",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities\\FileAssociations",
+      ".docm",
+      "VForge Word.DocumentMacroEnabled"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.Template\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.dotx\\OpenWithProgids",
+      "VForge Word.Template",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".dotx",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities\\FileAssociations",
+      ".dotx",
+      "VForge Word.Template"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.TemplateMacroEnabled\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.dotm\\OpenWithProgids",
+      "VForge Word.TemplateMacroEnabled",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".dotm",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities\\FileAssociations",
+      ".dotm",
+      "VForge Word.TemplateMacroEnabled"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.LegacyDocument\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.doc\\OpenWithProgids",
+      "VForge Word.LegacyDocument",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".doc",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities\\FileAssociations",
+      ".doc",
+      "VForge Word.LegacyDocument"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.LegacyTemplate\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.dot\\OpenWithProgids",
+      "VForge Word.LegacyTemplate",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".dot",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities\\FileAssociations",
+      ".dot",
+      "VForge Word.LegacyTemplate"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.RichText\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.rtf\\OpenWithProgids",
+      "VForge Word.RichText",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".rtf",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities\\FileAssociations",
+      ".rtf",
+      "VForge Word.RichText"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.OpenDocumentText\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.odt\\OpenWithProgids",
+      "VForge Word.OpenDocumentText",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".odt",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\VForge Word\\Capabilities\\FileAssociations",
+      ".odt",
+      "VForge Word.OpenDocumentText"
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.Markdown\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.md\\OpenWithProgids",
+      "VForge Word.Markdown",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".md",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\VForge Word.PlainText\\shell\\open\\command",
+      "",
+      "\"[#VForgeWordExe]\" \"%1\""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\.txt\\OpenWithProgids",
+      "VForge Word.PlainText",
+      ""
+    ],
+    [
+      "-1",
+      "Software\\Classes\\Applications\\vforge-word.exe\\SupportedTypes",
+      ".txt",
+      ""
+    ]
+  ],
+  "mode": "dualScope"
+}

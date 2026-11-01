@@ -1,0 +1,14 @@
+*~
+target/
+**/target/
+/dist
+**/dist/
+/corpus
+/log
+*.log
+**/*.log
+.DS_Store
+**/.DS_Store
+/.claude/
+/target-*/
+/craft-fonts/

@@ -1,0 +1,21 @@
+[package]
+name = "vforge-word-zotero"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "VForge Word Zotero integration: Zotero's word-processor wire protocol, answered against an engine Session"
+
+[lints]
+workspace = true
+
+[dependencies]
+vforge-word-doc = { workspace = true }
+vforge-word-engine = { workspace = true }
+vforge-word-formats = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+log = { workspace = true }
+
+[dev-dependencies]
+vforge-word-docx = { workspace = true }
+proptest = { workspace = true }

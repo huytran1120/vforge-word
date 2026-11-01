@@ -1,0 +1,23 @@
+[package]
+name = "vforge-word-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "VForge Word command line: convert, inspect, render, run commands, MCP server"
+
+[[bin]]
+name = "vforge-word-cli"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+vforge-word-doc = { workspace = true }
+vforge-word-engine = { workspace = true }
+vforge-word-render = { workspace = true }
+vforge-word-mcp = { workspace = true }
+vforge-word-zotero = { workspace = true }
+serde_json = { workspace = true }
+sys-locale = "0.3"
