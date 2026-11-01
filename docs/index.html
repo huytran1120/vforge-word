@@ -794,19 +794,19 @@
 
           <div id="code-cli" class="code-block">
             <div class="code-line"><span class="code-comment"># Chuyển đổi định dạng tệp siêu tốc</span></div>
-            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">wordcraft-cli convert report.docx report.pdf</span></div>
+            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">vforge-word-cli convert baocao.docx baocao.pdf</span></div>
             <div class="code-line"><span class="code-comment"># Trích xuất nội dung văn bản thuần</span></div>
-            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">wordcraft-cli text report.docx</span></div>
+            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">vforge-word-cli text baocao.docx</span></div>
             <div class="code-line"><span class="code-comment"># Kiểm tra cấu trúc tài liệu dưới dạng JSON</span></div>
-            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">wordcraft-cli inspect report.docx</span></div>
+            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">vforge-word-cli inspect baocao.docx</span></div>
           </div>
 
           <div id="code-mcp" class="code-block">
             <div class="code-line"><span class="code-comment"># Kết nối Claude Desktop hoặc Antigravity qua MCP</span></div>
-            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">claude mcp add vforge-word -- wordcraft-cli mcp</span></div>
+            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">claude mcp add vforge-word -- vforge-word-cli mcp</span></div>
             <div class="code-line"><span class="code-comment"># Hoặc điều khiển cửa sổ app đang mở qua cổng socket</span></div>
             <div class="code-line"><span class="code-prompt">$</span><span class="code-text">vforge-word --control 7981 &amp;</span></div>
-            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">claude mcp add vforge-app -- wordcraft-cli mcp --connect 127.0.0.1:7981</span></div>
+            <div class="code-line"><span class="code-prompt">$</span><span class="code-text">claude mcp add vforge-app -- vforge-word-cli mcp --connect 127.0.0.1:7981</span></div>
           </div>
         </div>
       </div>
