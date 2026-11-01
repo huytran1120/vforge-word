@@ -87,7 +87,7 @@
     .logo-link {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       text-decoration: none;
       color: var(--text-main);
       font-weight: 700;
@@ -95,16 +95,26 @@
       letter-spacing: -0.02em;
     }
 
-    .logo-img {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-    }
-
     .logo-wordmark {
-      height: 24px;
+      height: 28px;
       width: auto;
       display: inline-block;
+      vertical-align: middle;
+      transition: opacity 0.15s;
+    }
+
+    .logo-word-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(252, 106, 13, 0.12);
+      color: #FC6A0D;
+      border: 1px solid rgba(252, 106, 13, 0.28);
+      margin-left: 2px;
       vertical-align: middle;
     }
 
@@ -621,11 +631,10 @@
   <!-- Navigation -->
   <header>
     <div class="container nav-inner">
-      <a href="#" class="logo-link">
-        <img src="assets/icon.png?v=2" alt="vforge-word Logo" class="logo-img">
-        <img src="brand/vforge-wordmark-transparent.png?v=2" alt="VForge" class="logo-wordmark wordmark-light">
-        <img src="brand/vforge-wordmark-darkmode.png?v=2" alt="VForge" class="logo-wordmark wordmark-dark">
-        <span style="font-weight: 500; color: var(--text-muted); font-size: 0.95rem; margin-left: -4px;">Word</span>
+      <a href="#" class="logo-link" aria-label="VForge Word">
+        <img src="brand/vforge-wordmark-transparent.png?v=3" alt="VForge" class="logo-wordmark wordmark-light">
+        <img src="brand/vforge-wordmark-darkmode.png?v=3" alt="VForge" class="logo-wordmark wordmark-dark">
+        <span class="logo-word-badge">Word</span>
       </a>
 
       <ul class="nav-links">
