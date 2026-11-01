@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1726" />
+      <stop offset="50%" stop-color="#0b1120" />
+      <stop offset="100%" stop-color="#060a12" />
+    </linearGradient>
+
+    <!-- Outer Glow / Rim -->
+    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#6366f1" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.4" />
+    </linearGradient>
+
+    <!-- Left Wing of V (Document / Sheet) -->
+    <linearGradient id="leftWing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+
+    <!-- Right Wing of V (Folded Forefront Layer) -->
+    <linearGradient id="rightWing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+
+    <!-- Central Document Card Gradient -->
+    <linearGradient id="docGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+
+    <!-- Gold / Forge Glow Accent -->
+    <linearGradient id="forgeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filters -->
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- 1. Background Tile (Squircle) -->
+  <rect width="512" height="512" rx="116" fill="url(#bgGrad)" />
+  <!-- Subtle Outer Rim / Glass Border -->
+  <rect x="2" y="2" width="508" height="508" rx="114" fill="none" stroke="url(#rimGrad)" stroke-width="3" />
+
+  <!-- Background Ambient Glow -->
+  <circle cx="256" cy="240" r="140" fill="#2563eb" opacity="0.15" filter="blur(40px)" />
+  <circle cx="256" cy="360" r="100" fill="#38bdf8" opacity="0.12" filter="blur(30px)" />
+
+  <!-- 2. Main Icon Composition: Stylized Modern "V" + Document Fold -->
+  <g filter="url(#dropShadow)">
+
+    <!-- Back Page (Left Wing) - Folded Page Angle -->
+    <path d="M 124 120 
+             L 216 120 
+             L 256 320 
+             L 174 320 
+             Z" 
+          fill="url(#leftWing)" opacity="0.95" />
+
+    <!-- Document Lines on Left Wing -->
+    <line x1="150" y1="165" x2="195" y2="165" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.6" />
+    <line x1="160" y1="195" x2="208" y2="195" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.6" />
+    <line x1="170" y1="225" x2="218" y2="225" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.6" />
+
+    <!-- Center White/Silver Page - Origami Layer -->
+    <path d="M 190 100 
+             L 322 100 
+             L 322 250 
+             L 256 420 
+             L 190 250 
+             Z" 
+          fill="url(#docGrad)" />
+
+    <!-- Folded Corner on White Page (Top-Right) -->
+    <path d="M 276 100 L 322 146 L 276 146 Z" fill="#cbd5e1" />
+    <path d="M 276 100 L 322 100 L 322 146 Z" fill="#94a3b8" opacity="0.4" />
+
+    <!-- Clean Typography/Document Ruled Lines on Center Page -->
+    <line x1="222" y1="170" x2="290" y2="170" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />
+    <line x1="222" y1="202" x2="280" y2="202" stroke="#64748b" stroke-width="5" stroke-linecap="round" opacity="0.7" />
+    <line x1="222" y1="234" x2="270" y2="234" stroke="#64748b" stroke-width="5" stroke-linecap="round" opacity="0.7" />
+    <line x1="230" y1="266" x2="260" y2="266" stroke="#64748b" stroke-width="5" stroke-linecap="round" opacity="0.5" />
+
+    <!-- Right Wing of V (Foreground Dynamic Blade / Pen Nib) -->
+    <path d="M 388 120 
+             L 296 120 
+             L 256 430 
+             L 298 430 
+             Z" 
+          fill="url(#rightWing)" />
+
+    <!-- Edge Reflection on Right Wing -->
+    <path d="M 388 120 L 372 120 L 284 430 L 298 430 Z" fill="#ffffff" opacity="0.25" />
+
+    <!-- The "Forge" Spark / Quill Point at the V vertex -->
+    <circle cx="256" cy="426" r="7" fill="url(#forgeGlow)" />
+    <path d="M 256 414 L 260 426 L 256 438 L 252 426 Z" fill="#ffffff" />
+
+    <!-- Top Floating Sparkles / Forge Creativity Spark -->
+    <path d="M 370 82 
+             C 370 94, 382 94, 382 94 
+             C 382 94, 370 94, 370 106 
+             C 370 94, 358 94, 358 94 
+             C 358 94, 370 94, 370 82 Z" 
+          fill="url(#forgeGlow)" />
+  </g>
+</svg>
