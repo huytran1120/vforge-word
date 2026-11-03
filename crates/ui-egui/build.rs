@@ -42,6 +42,8 @@ fn main() {
 
 /// The catalog this app reads in each locale: `locales/<locale>/vforge-word.tsv`.
 const APP_CATALOG: &str = "vforge-word.tsv";
+/// Upstream craft-i18n catalog name before rebranding.
+const LEGACY_APP_CATALOG: &str = "wordcraft.tsv";
 
 /// `CRAFT_I18N` from `CRAFT_I18N_DIR`: the `Embedded` list the craft-i18n crate reads.
 fn craft_i18n() -> String {
@@ -55,14 +57,17 @@ fn craft_i18n() -> String {
         .or_else(|| if default_dir.is_dir() { Some(default_dir) } else { None });
     let entries = match i18n_dir {
         // Not canonicalized: on Windows that gives `\\?\C:\…`, which `include_str!` can't read.
-        Some(dir) => match locales(&dir.join("locales")) {
-            Ok(entries) => entries,
-            Err(e) => {
-                let level = if required { "error" } else { "warning" };
-                println!("cargo::{level}=CRAFT_I18N_DIR: {e}; the interface is English only");
-                Vec::new()
+        Some(dir) => {
+            let locales_dir = dir.join("locales");
+            match locales(&locales_dir).or_else(|e| fallback_locales(&locales_dir).ok_or(e)) {
+                Ok(entries) => entries,
+                Err(e) => {
+                    let level = if required { "error" } else { "warning" };
+                    println!("cargo::{level}=CRAFT_I18N_DIR: {e}; the interface is English only");
+                    Vec::new()
+                }
             }
-        },
+        }
         None => {
             if required {
                 println!("cargo::error=CRAFT_I18N_REQUIRED=1 but CRAFT_I18N_DIR is unset: a release must embed the translations");
@@ -114,6 +119,62 @@ fn locales(dir: &std::path::Path) -> Result<Vec<Locale>, String> {
     }
     out.sort();
     Ok(out)
+}
+
+/// When CI checks out upstream `storytold/craft-i18n` over `craft-i18n/`, restore the repository's
+/// `craft-i18n/locales` into `OUT_DIR` via git, or fall back to upstream `wordcraft.tsv` rebranded
+/// in `OUT_DIR`.
+fn fallback_locales(dir: &std::path::Path) -> Option<Vec<Locale>> {
+    if !dir.is_absolute() {
+        return None;
+    }
+    let has_legacy = std::fs::read_dir(dir).ok()?.flatten().any(|e| e.path().join(LEGACY_APP_CATALOG).is_file());
+    if !has_legacy {
+        return None;
+    }
+    let out_dir = std::path::PathBuf::from(std::env::var_os("OUT_DIR")?);
+    let git_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../.git");
+    if git_dir.exists() {
+        let work_tree = out_dir.join("git-craft-i18n");
+        let _ = std::fs::create_dir_all(&work_tree);
+        let status = std::process::Command::new("git")
+            .env("GIT_INDEX_FILE", work_tree.join(".index"))
+            .arg("--git-dir")
+            .arg(&git_dir)
+            .arg("--work-tree")
+            .arg(&work_tree)
+            .args(["checkout", "-f", "HEAD", "--", "craft-i18n/locales"])
+            .status();
+        if status.is_ok_and(|s| s.success())
+            && let Ok(entries) = locales(&work_tree.join("craft-i18n/locales"))
+        {
+            return Some(entries);
+        }
+    }
+    let converted = out_dir.join("fallback-craft-i18n/locales");
+    let list = std::fs::read_dir(dir).ok()?;
+    for entry in list.flatten() {
+        let path = entry.path();
+        let Some(code) = path.file_name().and_then(std::ffi::OsStr::to_str) else { continue };
+        let legacy = path.join(LEGACY_APP_CATALOG);
+        if !legacy.is_file() {
+            continue;
+        }
+        let dest = converted.join(code);
+        let _ = std::fs::create_dir_all(&dest);
+        if let Ok(text) = std::fs::read_to_string(&legacy) {
+            let rebranded = text.replace("WordCraft", "VForge Word").replace("wordcraft", "vforge-word");
+            let _ = std::fs::write(dest.join(APP_CATALOG), rebranded);
+        }
+        let shared = path.join("common.tsv");
+        if shared.is_file()
+            && let Ok(text) = std::fs::read_to_string(&shared)
+        {
+            let rebranded = text.replace("WordCraft", "VForge Word").replace("wordcraft", "vforge-word");
+            let _ = std::fs::write(dest.join("common.tsv"), rebranded);
+        }
+    }
+    locales(&converted).ok()
 }
 
 fn read<T>(path: &std::path::Path, fallback: &str, parse: impl Fn(&str) -> Result<T, String>) -> Option<T> {
