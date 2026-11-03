@@ -1,10 +1,12 @@
-# WordCraft architecture
+# VForge Word architecture
 
 > **Last reviewed:** 2026-10-28 · **Last updated:** 2026-10-28 · **Change:** major (crate and layer inventory, source counts, proofing languages and module boundaries re-measured from this checkout; previously minor: `proof` is per language: English and Polish; previously major: first committed version; `plan/architecture.md` is local-only) · **Target:** Microsoft Word (Microsoft 365) for Mac 16.113.4
 
-How WordCraft is built today. The longer design notes in
+How VForge Word is built today. The longer design notes in
 `plan/architecture.md` are gitignored and local to the original author's machine; this file is the
 committed, current summary. Rules for working in the code are in [`AGENTS.md`](../AGENTS.md).
+
+> Sơ đồ kiến trúc trực quan (Stack Diagram): xem tại [`vforge-word-architecture.md`](vforge-word-architecture.md) (kèm ảnh [Light](images/vforge-word-architecture.png), [Dark](images/vforge-word-architecture-dark.png) và file tương tác [HTML](assets/vforge-word-architecture.html)).
 
 ## Layers
 
@@ -33,9 +35,9 @@ crate name links to its source tree.
 | L5 | [`mcp`](../crates/mcp/src) | 1,822 | MCP server exposing commands as tools; headless or bridged to the running app |
 | L5 | [`zotero`](../crates/zotero/src) | 2,372 | Zotero word-processor integration protocol answered against a `Session` |
 | L6 | [`ui-egui`](../crates/ui-egui/src) | 81,759 | Front end: ribbon, keytips, mini-toolbar, Backstage, canvas, rulers, panes, dialogs, i18n, themes, control channel and headless `ui_shot` example |
-| apps | [`wordcraft`](../apps/wordcraft/src) | 3,740 | Desktop app (eframe + wgpu; logging, window geometry and file associations) |
-| apps | [`wordcraft-cli`](../apps/wordcraft-cli/src) | 1,901 | `convert`, `text`, `inspect`, `run`, `commands`, `parity`, `mcp` and `zotero` |
-| apps | [`wordcraft-web`](../apps/wordcraft-web/src) | 1,159 | Browser build (eframe web runner, WebGPU with WebGL2 fallback) |
+| apps | [`vforge-word`](../apps/vforge-word/src) | 3,740 | Desktop app (eframe + wgpu; logging, window geometry and file associations) |
+| apps | [`vforge-word-cli`](../apps/vforge-word-cli/src) | 1,901 | `convert`, `text`, `inspect`, `run`, `commands`, `parity`, `mcp` and `zotero` |
+| apps | [`vforge-word-web`](../apps/vforge-word-web/src) | 1,159 | Browser build (eframe web runner, WebGPU with WebGL2 fallback) |
 | tooling | [`xtask`](../xtask/src) | 1,488 | Workspace maintenance and quality-gate commands, including `layers` |
 
 ## Data flow

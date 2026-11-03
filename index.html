@@ -802,9 +802,9 @@
             <span class="mockup-dot yellow"></span>
             <span class="mockup-dot green"></span>
           </div>
-          <div class="mockup-title">vforge-word — The Open Studio Handbook</div>
+          <div class="mockup-title">VForge Word — Sổ tay Studio Sáng tạo</div>
         </div>
-        <img src="images/hero.png" alt="vforge-word Hero Interface">
+        <img src="images/hero.png?v=5" alt="VForge Word Hero Interface">
       </div>
     </div>
   </section>
@@ -879,12 +879,12 @@
       </div>
 
       <div class="gallery-view">
-        <img id="img-review" src="images/review.png" alt="Soát lại: Track changes và comment" class="active">
-        <img id="img-references" src="images/references.png" alt="Tham chiếu: Mục lục và chú thích">
-        <img id="img-layout" src="images/layout.png" alt="Bố cục: Drop cap, chia cột, bọc văn bản">
-        <img id="img-design" src="images/design.png" alt="Thiết kế: Chủ đề, kiểu dáng, watermark">
-        <img id="img-dark" src="images/dark.png" alt="Chế độ tối và chèn bảng biểu">
-        <img id="img-backstage" src="images/backstage.png" alt="Menu tệp: Mẫu văn bản và thuộc tính">
+        <img id="img-review" src="images/review.png?v=5" alt="Soát lại: Track changes và comment" class="active">
+        <img id="img-references" src="images/references.png?v=5" alt="Tham chiếu: Mục lục và chú thích">
+        <img id="img-layout" src="images/layout.png?v=5" alt="Bố cục: Drop cap, chia cột, bọc văn bản">
+        <img id="img-design" src="images/design.png?v=5" alt="Thiết kế: Chủ đề, kiểu dáng, watermark">
+        <img id="img-dark" src="images/dark.png?v=5" alt="Chế độ tối và chèn bảng biểu">
+        <img id="img-backstage" src="images/backstage.png?v=5" alt="Menu tệp: Mẫu văn bản và thuộc tính">
 
         <div id="galleryCaption" class="gallery-caption">
           <b>Soát lại (Review):</b> Theo dõi sửa đổi (Track Changes), bóng bình luận lề phải, chấp nhận/từ chối sửa đổi và soát chính tả trực tiếp.
@@ -947,20 +947,24 @@
               <div class="install-step">
                 <div class="install-step-num">3</div>
                 <div class="install-step-content">
-                  <div class="install-step-title">Xác nhận bảo mật macOS (Lần đầu mở ứng dụng)</div>
+                  <div class="install-step-title">Xác nhận Gatekeeper macOS (Khi mở file .dmg hoặc ứng dụng lần đầu)</div>
                   <div class="install-step-desc">
-                    Do đây là bản build cộng đồng mã nguồn mở (chưa đăng ký chứng chỉ trả phí Apple Developer ID), nếu macOS hiển thị cảnh báo bảo mật khi mở lần đầu, bạn thực hiện như sau:
+                    Do đây là bản build cộng đồng mã nguồn mở (chưa đăng ký chứng chỉ trả phí Apple Developer ID), nếu macOS hiện thông báo <em>“vforge-word-0.13.2-macos-universal.dmg Not Opened”</em> khi vừa tải về:
                   </div>
                   <div class="install-alert">
                     <div style="font-weight: 600; margin-bottom: 6px;">
-                      🛡️ Hướng dẫn mở ứng dụng:
+                      🛡️ Cách 1 (Nhanh nhất qua Terminal — Mở ngay cả .dmg và app không bị chặn):
                     </div>
-                    1. Mở <strong>Cài đặt hệ thống (System Settings)</strong> &gt; chọn <strong>Quyền riêng tư &amp; Bảo mật (Privacy &amp; Security)</strong>.<br>
-                    2. Cuộn xuống mục <em>Bảo mật (Security)</em> và nhấn vào nút <strong>Open Anyway (Vẫn mở)</strong>.<br>
+                    <code>xattr -cr ~/Downloads/vforge-word-0.13.2-macos-universal.dmg &amp;&amp; open ~/Downloads/vforge-word-0.13.2-macos-universal.dmg</code>
+                    <div style="font-weight: 600; margin-top: 10px; margin-bottom: 4px;">
+                      ⚙️ Cách 2 (Mở trực tiếp trên giao diện macOS):
+                    </div>
+                    1. Nhấn <strong>Done (Xong)</strong> trên hộp thoại cảnh báo (không nhấn <em>Move to Trash</em>).<br>
+                    2. Mở <strong>Cài đặt hệ thống (System Settings)</strong> &gt; <strong>Quyền riêng tư &amp; Bảo mật (Privacy &amp; Security)</strong>.<br>
+                    3. Cuộn xuống mục <em>Bảo mật (Security)</em> và nhấn <strong>Open Anyway (Vẫn mở)</strong>.<br>
                     <div style="margin-top: 6px; font-size: 0.82rem; opacity: 0.85;">
-                      <em>Mẹo dòng lệnh (Terminal): Bạn cũng có thể mở Terminal và gõ:</em>
+                      <em>Nếu đã kéo vào Applications mà bị hỏi lại:</em> <code>xattr -cr "/Applications/VForge Word.app"</code>
                     </div>
-                    <code>xattr -cr "/Applications/VForge Word.app"</code>
                   </div>
                 </div>
               </div>
