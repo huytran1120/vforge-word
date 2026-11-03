@@ -1,35 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <!-- Original VForge Word mark: a document behind two forged V ribbons. -->
+  <!-- Original VForge Word mark: a document behind a small VF monogram. -->
   <defs>
     <linearGradient id="sheet" x1="176" y1="78" x2="335" y2="409" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFFFFF"/>
       <stop offset="1" stop-color="#D8E7EE"/>
-    </linearGradient>
-    <linearGradient id="ink" x1="108" y1="119" x2="260" y2="415" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#75DBF1"/>
-      <stop offset="1" stop-color="#2495CE"/>
-    </linearGradient>
-    <linearGradient id="forge" x1="328" y1="128" x2="256" y2="420" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFAB59"/>
-      <stop offset="0.52" stop-color="#FF853E"/>
-      <stop offset="1" stop-color="#F0632F"/>
     </linearGradient>
   </defs>
 
   <rect width="512" height="512" rx="112" fill="#3B5BDB"/>
   <rect x="3" y="3" width="506" height="506" rx="109" fill="none" stroke="#FFFFFF" stroke-opacity=".10" stroke-width="6"/>
 
-  <!-- The sheet is set back from the V, with a visible folded top corner. -->
+  <!-- The sheet is set back from the monogram, with a visible folded top corner. -->
   <path d="M164 81H320L366 127V394Q366 411 349 411H164Q147 411 147 394V98Q147 81 164 81Z" fill="url(#sheet)"/>
   <path d="M320 81V111Q320 127 336 127H366Z" fill="#AFC8D7"/>
   <path d="M320 81V111Q320 127 336 127H366" fill="none" stroke="#93AFC0" stroke-width="2"/>
-  <path d="M186 161H304M186 191H315M186 221H295" fill="none" stroke="#A8BECA" stroke-width="8" stroke-linecap="round"/>
+  <path d="M186 161H304M186 191H315" fill="none" stroke="#A8BECA" stroke-width="8" stroke-linecap="round"/>
 
-  <!-- The monogram sits in front of the document. -->
-  <path d="M105 128H178L256 328L334 128H407L299 424H213Z" fill="#0B1C2C" opacity=".28"/>
-  <path d="M105 119H178L256 319L213 415Z" fill="url(#ink)"/>
-
-  <!-- The warm right ribbon is the forge stroke. Both ribbons meet at one point. -->
-  <path d="M334 119H407L299 415H213L256 319L334 119Z" fill="url(#forge)"/>
-  <path d="M334 119H407L396 151H321Z" fill="#FFD18D" fill-opacity=".50"/>
+  <!-- Draw the two letters as vector shapes so the icon needs no font at runtime. -->
+  <path d="M169 229H192L212 303L232 229H255L224 345H200Z" fill="#FF6A00"/>
+  <path d="M269 229H347V251H293V278H334V300H293V345H269Z" fill="#29394C"/>
 </svg>
