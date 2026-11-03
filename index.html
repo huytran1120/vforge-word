@@ -612,6 +612,85 @@
       color: var(--text-main);
     }
 
+
+    /* Installation Steps */
+    .install-steps {
+      font-family: var(--font-sans);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .install-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .install-step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+    .install-step-content {
+      flex: 1;
+    }
+    .install-step-title {
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+    .install-step-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .install-step-desc code {
+      font-family: var(--font-mono);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--text-main);
+    }
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.82rem;
+    }
+    .install-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .install-alert {
+      margin-top: 10px;
+      padding: 14px 16px;
+      background: rgba(234, 179, 8, 0.08);
+      border: 1px solid rgba(234, 179, 8, 0.28);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .install-alert strong {
+      color: #fbbf24;
+    }
+    .install-alert code {
+      font-family: var(--font-mono);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #fde047;
+    }
+
     /* Mobile Responsive */
     @media (max-width: 900px) {
       .bento-grid {
@@ -691,13 +770,28 @@
       </p>
 
       <div class="hero-buttons">
-        <a href="https://github.com/huytran1120/vforge-word" target="_blank" rel="noopener" class="btn btn-primary">
+        <a href="https://github.com/huytran1120/vforge-word/releases/download/v0.13.2/vforge-word-0.13.2-macos-universal.dmg" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Tải về cho macOS (.dmg v0.13.2)
+        </a>
+        <a href="#quickstart" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4"></path>
+            <path d="M12 8h.01"></path>
+          </svg>
+          Hướng dẫn cài đặt
+        </a>
+        <a href="https://github.com/huytran1120/vforge-word" target="_blank" rel="noopener" class="btn btn-secondary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
           </svg>
-          Mã nguồn trên GitHub
+          Mã nguồn
         </a>
-        <a href="#gallery" class="btn btn-secondary">Xem ảnh chụp giao diện</a>
       </div>
 
       <!-- Hero Mockup Window -->
@@ -803,14 +897,15 @@
   <section id="quickstart" class="section">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">Cài đặt & Khởi chạy</div>
-        <h2 class="section-title">Chạy thử nghiệm trên máy của bạn</h2>
+        <div class="section-eyebrow">Tải về & Cài đặt</div>
+        <h2 class="section-title">Sẵn sàng sử dụng trên máy tính của bạn</h2>
       </div>
 
       <div class="terminal-card">
         <div class="terminal-header">
           <div class="terminal-tabs">
-            <button class="terminal-tab active" data-target="code-desktop">Desktop GUI</button>
+            <button class="terminal-tab active" data-target="guide-macos">Tải file .dmg (macOS)</button>
+            <button class="terminal-tab" data-target="code-desktop">Tự biên dịch (Cargo)</button>
             <button class="terminal-tab" data-target="code-cli">Công cụ CLI</button>
             <button id="mcp" class="terminal-tab" data-target="code-mcp">AI Agent (MCP)</button>
           </div>
@@ -818,7 +913,61 @@
         </div>
 
         <div class="terminal-body">
-          <div id="code-desktop" class="code-block active">
+          <div id="guide-macos" class="code-block active">
+            <div class="install-steps">
+              <div class="install-step">
+                <div class="install-step-num">1</div>
+                <div class="install-step-content">
+                  <div class="install-step-title">Tải file cài đặt .dmg về máy</div>
+                  <div class="install-step-desc">
+                    Hỗ trợ định dạng Universal Binary (chạy mượt mà trên cả máy tính Mac Apple Silicon M1/M2/M3/M4 và chip Intel).
+                  </div>
+                  <div class="install-btn-group">
+                    <a href="https://github.com/huytran1120/vforge-word/releases/download/v0.13.2/vforge-word-0.13.2-macos-universal.dmg" class="btn btn-primary btn-sm">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                      Tải vforge-word-0.13.2-macos-universal.dmg (59.3 MB)
+                    </a>
+                    <a href="https://github.com/huytran1120/vforge-word/releases/download/v0.13.2/vforge-word-cli-0.13.2-macos-universal.zip" class="btn btn-secondary btn-sm">
+                      Tải vforge-word-cli (.zip, 31.4 MB)
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="install-step">
+                <div class="install-step-num">2</div>
+                <div class="install-step-content">
+                  <div class="install-step-title">Mở file .dmg và kéo vào thư mục Applications</div>
+                  <div class="install-step-desc">
+                    Nhấp đúp mở file <code>.dmg</code> vừa tải, sau đó kéo thả biểu tượng <strong>VForge Word</strong> vào thư mục <strong>Applications (Ứng dụng)</strong> trên máy.
+                  </div>
+                </div>
+              </div>
+
+              <div class="install-step">
+                <div class="install-step-num">3</div>
+                <div class="install-step-content">
+                  <div class="install-step-title">Xác nhận bảo mật macOS (Lần đầu mở ứng dụng)</div>
+                  <div class="install-step-desc">
+                    Do đây là bản build cộng đồng mã nguồn mở (chưa đăng ký chứng chỉ trả phí Apple Developer ID), nếu macOS hiển thị cảnh báo bảo mật khi mở lần đầu, bạn thực hiện như sau:
+                  </div>
+                  <div class="install-alert">
+                    <div style="font-weight: 600; margin-bottom: 6px;">
+                      🛡️ Hướng dẫn mở ứng dụng:
+                    </div>
+                    1. Mở <strong>Cài đặt hệ thống (System Settings)</strong> &gt; chọn <strong>Quyền riêng tư &amp; Bảo mật (Privacy &amp; Security)</strong>.<br>
+                    2. Cuộn xuống mục <em>Bảo mật (Security)</em> và nhấn vào nút <strong>Open Anyway (Vẫn mở)</strong>.<br>
+                    <div style="margin-top: 6px; font-size: 0.82rem; opacity: 0.85;">
+                      <em>Mẹo dòng lệnh (Terminal): Bạn cũng có thể mở Terminal và gõ:</em>
+                    </div>
+                    <code>xattr -cr "/Applications/VForge Word.app"</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="code-desktop" class="code-block">
             <div class="code-line"><span class="code-prompt">$</span><span class="code-text">git clone https://github.com/huytran1120/vforge-word.git</span></div>
             <div class="code-line"><span class="code-prompt">$</span><span class="code-text">cd vforge-word</span></div>
             <div class="code-line"><span class="code-comment"># Khởi chạy ứng dụng với tài liệu mẫu</span></div>
