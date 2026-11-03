@@ -28,6 +28,8 @@ render() {
 }
 
 render "$SVG" 1024 "$DIR/vforge-word-1024.png"
+# Keep the website favicon in sync with the packaged application icon.
+render "$SVG" 128 "$ROOT/docs/assets/icon.png"
 # Runtime window/Dock icon on macOS (embedded by apps/vforge-word); other platforms use hicolor 256.
 render "$MAC" 512 "$DIR/vforge-word-macos-512.png"
 

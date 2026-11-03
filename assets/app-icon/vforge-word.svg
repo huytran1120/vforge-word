@@ -1,120 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Original VForge Word mark: a document behind two forged V ribbons. -->
   <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0e1726" />
-      <stop offset="50%" stop-color="#0b1120" />
-      <stop offset="100%" stop-color="#060a12" />
+    <linearGradient id="tile" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#26344A"/>
+      <stop offset="1" stop-color="#101824"/>
     </linearGradient>
-
-    <!-- Outer Glow / Rim -->
-    <linearGradient id="rimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.6" />
-      <stop offset="50%" stop-color="#6366f1" stop-opacity="0.2" />
-      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.4" />
+    <linearGradient id="sheet" x1="176" y1="78" x2="335" y2="409" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D8E7EE"/>
     </linearGradient>
-
-    <!-- Left Wing of V (Document / Sheet) -->
-    <linearGradient id="leftWing" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2563eb" />
-      <stop offset="100%" stop-color="#1d4ed8" />
+    <linearGradient id="ink" x1="108" y1="119" x2="260" y2="415" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#75DBF1"/>
+      <stop offset="1" stop-color="#2495CE"/>
     </linearGradient>
-
-    <!-- Right Wing of V (Folded Forefront Layer) -->
-    <linearGradient id="rightWing" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="50%" stop-color="#0284c7" />
-      <stop offset="100%" stop-color="#0369a1" />
+    <linearGradient id="forge" x1="328" y1="128" x2="256" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFAB59"/>
+      <stop offset="0.52" stop-color="#FF853E"/>
+      <stop offset="1" stop-color="#F0632F"/>
     </linearGradient>
-
-    <!-- Central Document Card Gradient -->
-    <linearGradient id="docGrad" x1="20%" y1="0%" x2="80%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="100%" stop-color="#e2e8f0" />
-    </linearGradient>
-
-    <!-- Gold / Forge Glow Accent -->
-    <linearGradient id="forgeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fbbf24" />
-      <stop offset="100%" stop-color="#f59e0b" />
-    </linearGradient>
-
-    <!-- Drop Shadow Filters -->
-    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.5" />
-    </filter>
-
-    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
   </defs>
 
-  <!-- 1. Background Tile (Squircle) -->
-  <rect width="512" height="512" rx="116" fill="url(#bgGrad)" />
-  <!-- Subtle Outer Rim / Glass Border -->
-  <rect x="2" y="2" width="508" height="508" rx="114" fill="none" stroke="url(#rimGrad)" stroke-width="3" />
+  <rect width="512" height="512" rx="112" fill="url(#tile)"/>
+  <rect x="3" y="3" width="506" height="506" rx="109" fill="none" stroke="#FFFFFF" stroke-opacity=".10" stroke-width="6"/>
 
-  <!-- Background Ambient Glow -->
-  <circle cx="256" cy="240" r="140" fill="#2563eb" opacity="0.15" filter="blur(40px)" />
-  <circle cx="256" cy="360" r="100" fill="#38bdf8" opacity="0.12" filter="blur(30px)" />
+  <!-- The sheet is set back from the V, with a visible folded top corner. -->
+  <path d="M164 81H320L366 127V394Q366 411 349 411H164Q147 411 147 394V98Q147 81 164 81Z" fill="url(#sheet)"/>
+  <path d="M320 81V111Q320 127 336 127H366Z" fill="#AFC8D7"/>
+  <path d="M320 81V111Q320 127 336 127H366" fill="none" stroke="#93AFC0" stroke-width="2"/>
+  <path d="M186 161H304M186 191H315M186 221H295" fill="none" stroke="#A8BECA" stroke-width="8" stroke-linecap="round"/>
 
-  <!-- 2. Main Icon Composition: Stylized Modern "V" + Document Fold -->
-  <g filter="url(#dropShadow)">
+  <!-- The monogram sits in front of the document. -->
+  <path d="M105 128H178L256 328L334 128H407L299 424H213Z" fill="#0B1C2C" opacity=".28"/>
+  <path d="M105 119H178L256 319L213 415Z" fill="url(#ink)"/>
 
-    <!-- Back Page (Left Wing) - Folded Page Angle -->
-    <path d="M 124 120 
-             L 216 120 
-             L 256 320 
-             L 174 320 
-             Z" 
-          fill="url(#leftWing)" opacity="0.95" />
-
-    <!-- Document Lines on Left Wing -->
-    <line x1="150" y1="165" x2="195" y2="165" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.6" />
-    <line x1="160" y1="195" x2="208" y2="195" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.6" />
-    <line x1="170" y1="225" x2="218" y2="225" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.6" />
-
-    <!-- Center White/Silver Page - Origami Layer -->
-    <path d="M 190 100 
-             L 322 100 
-             L 322 250 
-             L 256 420 
-             L 190 250 
-             Z" 
-          fill="url(#docGrad)" />
-
-    <!-- Folded Corner on White Page (Top-Right) -->
-    <path d="M 276 100 L 322 146 L 276 146 Z" fill="#cbd5e1" />
-    <path d="M 276 100 L 322 100 L 322 146 Z" fill="#94a3b8" opacity="0.4" />
-
-    <!-- Clean Typography/Document Ruled Lines on Center Page -->
-    <line x1="222" y1="170" x2="290" y2="170" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />
-    <line x1="222" y1="202" x2="280" y2="202" stroke="#64748b" stroke-width="5" stroke-linecap="round" opacity="0.7" />
-    <line x1="222" y1="234" x2="270" y2="234" stroke="#64748b" stroke-width="5" stroke-linecap="round" opacity="0.7" />
-    <line x1="230" y1="266" x2="260" y2="266" stroke="#64748b" stroke-width="5" stroke-linecap="round" opacity="0.5" />
-
-    <!-- Right Wing of V (Foreground Dynamic Blade / Pen Nib) -->
-    <path d="M 388 120 
-             L 296 120 
-             L 256 430 
-             L 298 430 
-             Z" 
-          fill="url(#rightWing)" />
-
-    <!-- Edge Reflection on Right Wing -->
-    <path d="M 388 120 L 372 120 L 284 430 L 298 430 Z" fill="#ffffff" opacity="0.25" />
-
-    <!-- The "Forge" Spark / Quill Point at the V vertex -->
-    <circle cx="256" cy="426" r="7" fill="url(#forgeGlow)" />
-    <path d="M 256 414 L 260 426 L 256 438 L 252 426 Z" fill="#ffffff" />
-
-    <!-- Top Floating Sparkles / Forge Creativity Spark -->
-    <path d="M 370 82 
-             C 370 94, 382 94, 382 94 
-             C 382 94, 370 94, 370 106 
-             C 370 94, 358 94, 358 94 
-             C 358 94, 370 94, 370 82 Z" 
-          fill="url(#forgeGlow)" />
-  </g>
+  <!-- The warm right ribbon is the forge stroke. Both ribbons meet at one point. -->
+  <path d="M334 119H407L299 415H213L256 319L334 119Z" fill="url(#forge)"/>
+  <path d="M334 119H407L396 151H321Z" fill="#FFD18D" fill-opacity=".50"/>
 </svg>
