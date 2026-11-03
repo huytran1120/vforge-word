@@ -86,10 +86,29 @@
 
 ## ⚡ Hướng dẫn cài đặt & Khởi chạy
 
-### 1. Yêu cầu hệ thống
+### 📦 Cách 1: Tải bản cài đặt sẵn cho macOS (.dmg - Khuyên dùng)
+
+Dành cho người dùng muốn cài đặt và sử dụng ngay không cần cài đặt môi trường Rust:
+
+1. **Tải file `.dmg` về máy**:
+   * 🍏 [**vforge-word-0.13.2-macos-universal.dmg**](https://github.com/huytran1120/vforge-word/releases/download/v0.13.2/vforge-word-0.13.2-macos-universal.dmg) (59.3 MB, Universal Binary tương thích cả chip Apple Silicon M1/M2/M3/M4 và Intel).
+   * 🛠️ [**vforge-word-cli-0.13.2-macos-universal.zip**](https://github.com/huytran1120/vforge-word/releases/download/v0.13.2/vforge-word-cli-0.13.2-macos-universal.zip) (31.4 MB, công cụ dòng lệnh).
+2. **Cài đặt**:
+   * Nhấp đúp mở file `.dmg` và kéo thả biểu tượng **VForge Word** vào thư mục **Applications (Ứng dụng)**.
+3. **Xác nhận bảo mật macOS (Lần đầu mở ứng dụng)**:
+   * Do đây là bản build cộng đồng mã nguồn mở (chưa đăng ký chứng chỉ trả phí Apple Developer ID), nếu macOS hiển thị thông báo bảo mật:
+     1. Vào **Cài đặt hệ thống (System Settings)** &gt; chọn **Quyền riêng tư & Bảo mật (Privacy & Security)**.
+     2. Cuộn xuống mục **Bảo mật (Security)** và bấm **Open Anyway (Vẫn mở)**.
+     *(Hoặc mở Terminal gõ lệnh: `xattr -cr "/Applications/VForge Word.app"`)*
+
+---
+
+### 🛠️ Cách 2: Tự biên dịch từ mã nguồn (Dành cho Lập trình viên)
+
+#### 1. Yêu cầu hệ thống
 * Cài đặt Rust và Cargo (khuyên dùng bản Rust stable hoặc nightly mới nhất).
 
-### 2. Biên dịch và khởi chạy
+#### 2. Biên dịch và khởi chạy
 
 ```sh
 # Di chuyển vào thư mục mã nguồn
